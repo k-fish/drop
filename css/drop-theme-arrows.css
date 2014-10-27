@@ -29,7 +29,7 @@
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
-    transform: translateZ(0);
+    transform: translateZ(0); }
     .drop-element.drop-theme-arrows .drop-content:before {
       content: "";
       display: block;
