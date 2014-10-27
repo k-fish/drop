@@ -45,14 +45,14 @@
       top: 100%;
       left: 50%;
       margin-left: -16px;
-      border-top-color: whitesmoke; }
+      border-top-color: white; }
   .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-center .drop-content {
     margin-top: 16px; }
     .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-center .drop-content:before {
       bottom: 100%;
       left: 50%;
       margin-left: -16px;
-      border-bottom-color: white; }
+      border-bottom-color: whitesmoke; }
   .drop-element.drop-theme-arrows.drop-element-attached-right.drop-element-attached-middle .drop-content {
     margin-right: 16px; }
     .drop-element.drop-theme-arrows.drop-element-attached-right.drop-element-attached-middle .drop-content:before {
