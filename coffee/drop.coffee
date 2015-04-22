@@ -114,7 +114,24 @@ createContext = (options={}) ->
 
       @content = document.createElement 'div'
       addClass @content, "#{ drop.classPrefix }-content"
-      if typeof @options.content is 'object'
+
+      if typeof @options.content is 'function'
+        generateAndSetContent = () =>
+          # content function might return a string or an element
+          contentElementOrHTML = @options.content.call(@, @)
+
+          if typeof contentElementOrHTML is 'string'
+            @content.innerHTML = contentElementOrHTML
+          else if typeof contentElementOrHTML is 'object'
+            @content.innerHTML = ""
+            @content.appendChild(contentElementOrHTML)
+          else
+            throw new Error 'Drop Error: Content function should return a string or HTMLElement.'
+
+        generateAndSetContent()
+        @on 'open', generateAndSetContent.bind(@)
+
+      else if typeof @options.content is 'object'
         @content.appendChild @options.content
       else
         @content.innerHTML = @options.content

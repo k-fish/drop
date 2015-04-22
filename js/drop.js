@@ -143,6 +143,8 @@
       };
 
       DropInstance.prototype.setupElements = function() {
+        var generateAndSetContent,
+          _this = this;
         this.drop = document.createElement('div');
         addClass(this.drop, drop.classPrefix);
         if (this.options.classes) {
@@ -150,7 +152,22 @@
         }
         this.content = document.createElement('div');
         addClass(this.content, "" + drop.classPrefix + "-content");
-        if (typeof this.options.content === 'object') {
+        if (typeof this.options.content === 'function') {
+          generateAndSetContent = function() {
+            var contentElementOrHTML;
+            contentElementOrHTML = _this.options.content.call(_this, _this);
+            if (typeof contentElementOrHTML === 'string') {
+              return _this.content.innerHTML = contentElementOrHTML;
+            } else if (typeof contentElementOrHTML === 'object') {
+              _this.content.innerHTML = "";
+              return _this.content.appendChild(contentElementOrHTML);
+            } else {
+              throw new Error('Drop Error: Content function should return a string or HTMLElement.');
+            }
+          };
+          generateAndSetContent();
+          this.on('open', generateAndSetContent.bind(this));
+        } else if (typeof this.options.content === 'object') {
           this.content.appendChild(this.options.content);
         } else {
           this.content.innerHTML = this.options.content;
